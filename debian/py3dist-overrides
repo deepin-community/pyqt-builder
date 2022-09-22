@@ -1,0 +1,2 @@
+# prevent dh_python3 from generating a dependency on python3-sip
+sip python3-sipbuild

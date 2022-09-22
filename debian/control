@@ -1,0 +1,49 @@
+Source: pyqt-builder
+Section: python
+Priority: optional
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Uploaders: Dmitry Shachnev <mitya57@debian.org>
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               python3-all,
+               python3-setuptools,
+               python3-sipbuild (>= 6.3),
+               python3-sphinx
+Rules-Requires-Root: no
+Standards-Version: 4.6.0
+Homepage: https://riverbankcomputing.com/software/pyqt-builder/intro
+Vcs-Git: https://salsa.debian.org/python-team/packages/pyqt-builder.git
+Vcs-Browser: https://salsa.debian.org/python-team/packages/pyqt-builder
+
+Package: python3-pyqtbuild
+Architecture: all
+Depends: python3-packaging,
+         python3-sipbuild (>= 6.3),
+         ${misc:Depends},
+         ${python3:Depends}
+Recommends: qt5-qmake
+Description: PEP 517 compliant PyQt build system
+ PyQt-builder is the PEP 517 compliant build system for PyQt and projects
+ that extend PyQt.  It extends the sip build system and uses Qt's qmake to
+ perform the actual compilation and installation of extension modules.
+ .
+ Projects that use PyQt-builder provide an appropriate pyproject.toml file
+ and an optional project.py script.  Any PEP 517 compliant frontend, for
+ example sip-install or pip can then be used to build and install the
+ project.
+
+Package: pyqt-builder-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}, ${sphinxdoc:Depends}
+Description: PEP 517 compliant PyQt build system — documentation
+ PyQt-builder is the PEP 517 compliant build system for PyQt and projects
+ that extend PyQt.  It extends the sip build system and uses Qt's qmake to
+ perform the actual compilation and installation of extension modules.
+ .
+ Projects that use PyQt-builder provide an appropriate pyproject.toml file
+ and an optional project.py script.  Any PEP 517 compliant frontend, for
+ example sip-install or pip can then be used to build and install the
+ project.
+ .
+ This package contains the documentation for PyQt-builder.

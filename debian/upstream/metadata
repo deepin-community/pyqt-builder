@@ -1,0 +1,6 @@
+Bug-Submit: https://www.riverbankcomputing.com/mailman/listinfo/pyqt
+Documentation: https://www.riverbankcomputing.com/static/Docs/PyQt-builder/
+Registry:
+  - Name: PyPI
+    Entry: PyQt-builder
+Repository: https://riverbankcomputing.com/hg/PyQt-builder/

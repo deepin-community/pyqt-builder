@@ -1,0 +1,112 @@
+pyqt-builder (1.12.2+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 30 Oct 2021 22:21:17 +0300
+
+pyqt-builder (1.12.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump python3-sipbuild Build-Depends and Depends to 6.3.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 17 Oct 2021 17:20:40 +0300
+
+pyqt-builder (1.11.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Wed, 06 Oct 2021 00:07:00 +0300
+
+pyqt-builder (1.10.3+dfsg-2) unstable; urgency=medium
+
+  * Bump Standards-Version to 4.6.0, no changes needed.
+  * Upload to unstable.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 21 Aug 2021 22:02:22 +0300
+
+pyqt-builder (1.10.3+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Tue, 06 Jul 2021 19:49:04 +0300
+
+pyqt-builder (1.10.1+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Make Homepage point to upstream web site, not PyPI.
+  * Update upstream metadata: use new Documentation URL, add Registry.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Tue, 15 Jun 2021 15:42:21 +0300
+
+pyqt-builder (1.10.0+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Fri, 14 May 2021 20:11:24 +0300
+
+pyqt-builder (1.9.1+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Wed, 10 Mar 2021 20:13:00 +0300
+
+pyqt-builder (1.9.0+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Wed, 24 Feb 2021 21:34:27 +0300
+
+pyqt-builder (1.8.0+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Bump years in debian/copyright.
+  * Build Sphinx documentation and ship it in pyqt-builder-doc package.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Tue, 09 Feb 2021 15:53:22 +0300
+
+pyqt-builder (1.7.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 4.5.1, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Thu, 07 Jan 2021 15:45:47 +0300
+
+pyqt-builder (1.6.0+dfsg-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Update Maintainer field with new Debian Python Team
+    contact address.
+  * d/control: Update Vcs-* fields with new Debian Python Team Salsa
+    layout.
+
+  [ Dmitry Shachnev ]
+  * New upstream release.
+  * Exclude doc/html from the repacked tarball.
+  * Update debian/copyright for upstream license change.
+  * Bump required python3-sipbuild version to 5.5.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 28 Nov 2020 11:59:45 +0300
+
+pyqt-builder (1.5.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump python3-sipbuild Build-Depends and Depends to 5.4.
+  * Depend on python3-packaging.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 30 Aug 2020 11:13:52 +0300
+
+pyqt-builder (1.4.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Add debian/upstream/metadata file.
+  * Depend on python3-sipbuild ≥ 5.3 (according to setup.py).
+  * Update to debhelper compat level 13.
+  * Upload to unstable.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Mon, 08 Jun 2020 14:42:26 +0300
+
+pyqt-builder (1.3.1+dfsg-1) experimental; urgency=medium
+
+  * Initial release (closes: #953272).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Fri, 10 Apr 2020 19:11:04 +0300

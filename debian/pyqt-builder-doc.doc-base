@@ -1,0 +1,11 @@
+Document: pyqt-builder-doc
+Title: PyQt-builder Reference Guide
+Author: Riverbank Computing Limited
+Abstract: PyQt-builder is a tool for generating Python bindings for C++
+ libraries that use the Qt application framework. The bindings are built on
+ top of the PyQt bindings for Qt. PyQt-builder is used to build PyQt itself.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/pyqt-builder-doc/html/index.html
+Files: /usr/share/doc/pyqt-builder-doc/html/*.html
