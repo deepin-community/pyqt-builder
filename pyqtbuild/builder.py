@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Riverbank Computing Limited
+# Copyright (c) 2022, Riverbank Computing Limited
 # All rights reserved.
 #
 # This copy of PyQt-builder is licensed for use under the terms of the SIP
@@ -30,6 +30,7 @@ from sipbuild import (Buildable, BuildableModule, Builder, Option, Project,
         PyProjectOptionException, UserException)
 
 from .installable import QmakeTargetInstallable
+from .version import PYQTBUILD_VERSION_STR
 
 
 class QmakeBuilder(Builder):
@@ -55,9 +56,10 @@ class QmakeBuilder(Builder):
             # it.  However for our own frontends we want to use the version
             # corresponding to the frontend (and, anyway, the frontend may not
             # be on PATH).
-            if tool != 'pep517':
-                self._sip_distinfo = os.path.join(
-                        os.path.abspath(os.path.dirname(sys.argv[0])),
+            exe_dir, exe_name = os.path.split(sys.argv[0])
+
+            if exe_name.startswith('sip-'):
+                self._sip_distinfo = os.path.join(os.path.abspath(exe_dir),
                         self._sip_distinfo)
 
             # Check we have a qmake.
@@ -80,8 +82,8 @@ class QmakeBuilder(Builder):
             if self.spec is None:
                 self.spec = self.qt_configuration['QMAKE_SPEC']
 
-                # The binary OS/X Qt installer used to default to XCode.  If so
-                # then use macx-clang.
+                # The Qt installer used to default to XCode.  If so then use
+                # macx-clang.
                 if self.spec == 'macx-xcode':
                     # This will exist (and we can't check anyway).
                     self.spec = 'macx-clang'
@@ -112,7 +114,11 @@ class QmakeBuilder(Builder):
 
             project.py_platform = py_platform
 
-            # Set the default minimum GLIBC version.
+            # Set the default minimum GLIBC version.  This is actually a
+            # function of the build platform and it should really be determined
+            # by inspecting the compiled extension module.  These defaults
+            # reflect the minimum versions provided by the supported Qt
+            # platforms at any particular time.
             if not project.minimum_glibc_version:
                 if self.qt_version >= 0x060000:
                     project.minimum_glibc_version = '2.28'
@@ -140,18 +146,13 @@ class QmakeBuilder(Builder):
 
             # Set the default ABI version of the sip module.
             if not project.abi_version:
-                # The defaults should really be the .0 versions but we
-                # originally didn't specify a minor version so that SIP
-                # defaulted to the latest version it knew about (which may vary
-                # according to the SIP version).  We therefore specify the
-                # minimum version needed by the current versions of PyQt at the
-                # time of writing.  If later versions of PyQt have different
-                # requirements then they will explicitly specify the required
-                # version.
+                # These are the minimum recommended versions.  They usually
+                # correspond to specific functionality that users would expect
+                # to be enabled.
                 if project.sip_module == 'PyQt5.sip':
-                    project.abi_version = '12.8'
+                    project.abi_version = '12.11'
                 elif project.sip_module == 'PyQt6.sip':
-                    project.abi_version = '13.1'
+                    project.abi_version = '13.4'
 
         super().apply_user_defaults(tool)
 
@@ -233,7 +234,8 @@ class QmakeBuilder(Builder):
             inventory.close()
 
             args = project.get_sip_distinfo_command_line(self._sip_distinfo,
-                    inventory_fn, generator=os.path.basename(sys.argv[0]),
+                    inventory_fn, generator='pyqtbuild',
+                    generator_version=PYQTBUILD_VERSION_STR,
                     wheel_tag=wheel_tag)
             args.append(self.qmake_quote(project.get_distinfo_dir(target_dir)))
 
@@ -532,11 +534,15 @@ macx {
         patch = self.qt_version & 0xff
 
         # Qt v5.12.4 was the last release where we updated for a patch version.
-        if (major, minor) >= (5, 13):
+        # This should be safe to do (given Qt's supposed use of semantic
+        # versioning) and removes the need to add new patch versions for old
+        # (ie. LTS) versions.  However Qt v5.15 breaks semantic versioning so
+        # we need the patch version, but as it is the very last minor version
+        # of Qt5 we don't need to worry about old versions.
+        if (5, 13) <= (major, minor) < (5, 15) or major >= 6:
             patch = 0
-        elif (major, minor) == (5, 12):
-            if patch > 4:
-                patch = 4
+        elif (5, 12, 4) <= (major, minor, patch) < (5, 13, 0):
+            patch = 4
 
         self.qt_version_tag = '{}_{}_{}'.format(major, minor, patch)
 
@@ -680,11 +686,7 @@ macx {
 
         buildable.make_names_relative()
 
-        # Handle the target architecture(s).  The way that Python handles
-        # 'universal2' seems broken as it is determined by what versions of
-        # macOS and the SDK the interpreter was built against rather than the
-        # versions that are being used now.
-        if self.project.get_platform_tag().endswith('_universal2'):
+        if sys.platform == 'darwin' and self.project.apple_universal2:
             pro_lines.append('QMAKE_APPLE_DEVICE_ARCHS = x86_64 arm64')
 
         # Handle debugging.

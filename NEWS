@@ -1,3 +1,33 @@
+v1.15.4 23rd November 2023
+  - A bug fix release.
+
+v1.15.3 12th October 2023
+  - Added the '--apple-universal2' command line option to the build tools to
+    specify a universal build on macOS.
+
+v1.15.2 4th July 2023
+  - A bug fix release.
+
+v1.15.1 24th April 2023
+  - Added support for bundling the QtLabs QML packages.
+
+v1.15.0 4th April 2023
+  - Added support for QtSpatialAudio for PyQt6.
+  - A bug fix release.
+
+v1.14.1 22nd January 2023
+  - Support different patch versions for Qt v5.15.
+
+v1.14.0 21st September 2022
+  - Added support for QtPdf, QtPdfWidgets and QtTextToSpeech for PyQt6.
+  - SIP v6.7 is now required.
+
+v1.13.0 6th June 2022
+  - The default ABI versions are now v12.11 and v13.4 so that wrapped classes
+    can be used by sip.array.
+  - Removed support for bundling version of Qt older than v5.15.
+  - Removed support for Python v3.6.
+
 v1.12.2 25th October 2021
   - A bug fix release.
 

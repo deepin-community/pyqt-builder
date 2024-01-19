@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Riverbank Computing Limited
+# Copyright (c) 2023, Riverbank Computing Limited
 # All rights reserved.
 #
 # This copy of PyQt-builder is licensed for use under the terms of the SIP
@@ -40,9 +40,9 @@ _QT_METADATA = {
             other_lib_deps={
                 'linux': ('libicui18n.so.56', 'libicuuc.so.56',
                           'libicudata.so.56')},
-            translations=('qt_', 'qt_help', 'qtbase', 'qtdeclarative', 
-                'qtlocation', 'qtmultimedia', 'qtquickcontrols2',
-                'qtserialport', 'qtwebsockets'),
+            translations=('qt_', 'qt_help', 'qtbase', 'qtconnectivity',
+                'qtdeclarative', 'qtlocation', 'qtmultimedia',
+                'qtquickcontrols2', 'qtserialport', 'qtwebsockets'),
             excluded_plugins=('designer', 'qmltooling')),
         VersionedMetadata(
             other_lib_deps={
@@ -96,6 +96,13 @@ _QT_METADATA = {
     'QtOpenGLWidgets':
         VersionedMetadata(),
 
+    'QtPdf':
+        VersionedMetadata(version=(6, 4, 0),
+                lib_deps={'': ('QtPdfQuick', )}),
+
+    'QtPdfWidgets':
+        VersionedMetadata(version=(6, 4, 0)),
+
     'QtPositioning':
         VersionedMetadata(version=(6, 2, 0),
                 lib_deps={'': ('QtPositioningQuick', )},
@@ -104,10 +111,16 @@ _QT_METADATA = {
     'QtPrintSupport':
         VersionedMetadata(),
 
-    'QtQml':
+    'QtQml': (
+        VersionedMetadata(version=(6, 5, 0),
+                lib_deps={'': ('QtQmlModels', 'QtQmlWorkerScript',
+                        'QtLabsAnimation', 'QtLabsFolderListModel',
+                        'QtLabsQmlModels', 'QtLabsSettings',
+                        'QtLabsSharedImage', 'QtLabsWavefrontMesh')},
+                qml=True),
         VersionedMetadata(
                 lib_deps={'': ('QtQmlModels', 'QtQmlWorkerScript')},
-                qml=True),
+                qml=True)),
 
     'QtQuick': (
         VersionedMetadata(version=(6, 2, 0),
@@ -125,6 +138,14 @@ _QT_METADATA = {
                 qml=True)),
 
     'QtQuick3D': (
+        VersionedMetadata(version=(6, 4, 0),
+                lib_deps={
+                        '': ('QtConcurrent', 'QtQuick3DAssetImport',
+                        'QtQuick3DAssetUtils', 'QtQuick3DEffects',
+                        'QtQuick3DHelpers', 'QtQuick3DIblBaker',
+                        'QtQuick3DParticles', 'QtQuick3DRuntimeRender',
+                        'QtQuick3DUtils', 'QtShaderTools')},
+                qml=True),
         VersionedMetadata(version=(6, 1, 0),
                 lib_deps={
                         '': ('QtQuick3DAssetImport', 'QtQuick3DAssetUtils',
@@ -155,6 +176,10 @@ _QT_METADATA = {
     'QtSerialPort':
         VersionedMetadata(version=(6, 2, 0)),
 
+    'QtSpatialAudio':
+        VersionedMetadata(version=(6, 5, 0),
+                lib_deps={'': ('QtQuick3DSpatialAudio', )}),
+
     'QtSql':
         VersionedMetadata(),
 
@@ -167,11 +192,15 @@ _QT_METADATA = {
     'QtTest':
         VersionedMetadata(qml=True),
 
-    #'QtTextToSpeech':
-    #    VersionedMetadata(),
+    'QtTextToSpeech':
+        VersionedMetadata(version=(6, 4, 0), qml=True),
 
-    'QtWebChannel':
-        VersionedMetadata(version=(6, 2, 0), qml=True),
+    'QtWebChannel': (
+        # The quick library may have been present from the start.
+        VersionedMetadata(version=(6, 6, 0),
+                lib_deps={'': ('QtWebChannelQuick', )},
+                qml=True),
+        VersionedMetadata(version=(6, 2, 0), qml=True)),
 
     'QtWebSockets':
         VersionedMetadata(version=(6, 2, 0), qml=True),

@@ -1,3 +1,56 @@
+pyqt-builder (1.15.4+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 03 Dec 2023 18:50:02 +0300
+
+pyqt-builder (1.15.3+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 15 Oct 2023 23:12:11 +0300
+
+pyqt-builder (1.15.2+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Upload to unstable.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Mon, 24 Jul 2023 14:38:28 +0300
+
+pyqt-builder (1.15.1+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Wed, 31 May 2023 23:02:46 +0300
+
+pyqt-builder (1.15.0+dfsg-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 21 May 2023 19:23:13 +0300
+
+pyqt-builder (1.14.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 4.6.2, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 28 Jan 2023 22:07:34 +0400
+
+pyqt-builder (1.14.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump python3-sipbuild Build-Depends and Depends to 6.7.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Thu, 13 Oct 2022 23:57:44 +0300
+
+pyqt-builder (1.13.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump copyright years.
+  * Bump Standards-Version to 4.6.1, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Tue, 21 Jun 2022 12:51:20 +0300
+
 pyqt-builder (1.12.2+dfsg-1) unstable; urgency=medium
 
   * New upstream release.
