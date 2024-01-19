@@ -13,6 +13,11 @@ Unless stated otherwise, each option is added to all of the build tools.
 
     The target Android ABI.  This option may be given any number of times.
 
+.. option:: --apple-universal2
+
+    Build the project as an Apple universal package supporting both x86_64 and
+    arm64 architectures.  The default is to build for the native architecture.
+
 .. option:: --jobs N
 
     On Linux and macOS N make jobs will be run in parallel.

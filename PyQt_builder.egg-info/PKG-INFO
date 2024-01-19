@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: PyQt-builder
-Version: 1.12.2
+Version: 1.15.4
 Summary: The PEP 517 compliant PyQt build system
 Home-page: https://www.riverbankcomputing.com/software/pyqt-builder/
 Author: Riverbank Computing Limited
@@ -9,10 +9,10 @@ License: SIP
 Platform: X11
 Platform: macOS
 Platform: Windows
-Requires-Python: >=3.5
+Requires-Python: >=3.7
 License-File: LICENSE
-License-File: LICENSE-GPL3
 License-File: LICENSE-GPL2
+License-File: LICENSE-GPL3
 
 PyQt-builder - The PEP 517 Compliant PyQt Build System
 ======================================================
@@ -62,5 +62,3 @@ Documentation
 
 The documentation for the latest release can be found
 `here <https://www.riverbankcomputing.com/static/Docs/PyQt-builder/>`__.
-
-

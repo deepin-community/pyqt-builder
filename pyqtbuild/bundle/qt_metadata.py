@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Riverbank Computing Limited
+# Copyright (c) 2022, Riverbank Computing Limited
 # All rights reserved.
 #
 # This copy of PyQt-builder is licensed for use under the terms of the SIP
@@ -71,7 +71,7 @@ class VersionedMetadata:
         # See if a particular macOS architecture has been specified but only
         # for versions of Qt that support universal libraries.
         macos_thin_arch = self._get_macos_thin_arch(platform_tag)
-        if qt_version < (6, 2, 0):
+        if qt_version < (5, 15, 10) or (6, 0, 0) <= qt_version < (6, 2, 0):
             macos_thin_arch = None
 
         if macos_thin_arch is not None:
@@ -303,10 +303,6 @@ class VersionedMetadata:
 
         # Note that this assumes the executable is QtWebEngineProcess.
 
-        if qt_version == (5, 6, 0):
-            # Replace the incorrect rpath with the correct one.
-            subprocess.run(['chrpath', '--replace', '$ORIGIN/../lib', exe])
-
         cls._create_qt_conf(exe)
 
     @classmethod
@@ -315,33 +311,22 @@ class VersionedMetadata:
 
         # Note that this assumes the executable is QtWebEngineProcess.
 
-        if qt_version == (5, 6, 0):
-            # The rpaths were completly broken in this version.
-            subprocess.run(['install_name_tool', '-delete_rpath',
-                    '@loader_path/../../../../../../../../Frameworks', exe])
-            subprocess.run(['install_name_tool', '-delete_rpath',
-                    '/Users/qt/work/install/lib', exe])
+        # pip doesn't support symbolic links in wheels so the executable will
+        # be installed in its 'logical' location so adjust rpath so that it can
+        # still find the Qt libraries.  The required change is simple so we
+        # just patch the binary rather than require install_name_tool.  Note
+        # that install_name_tool is now always needed anyway.
+        with open(exe, 'rb') as f:
+            contents = f.read()
 
-            subprocess.run(['install_name_tool', '-add_rpath',
-                    '@loader_path/../../../../../', exe])
-        else:
-            # pip doesn't support symbolic links in wheels so the executable
-            # will be installed in its 'logical' location so adjust rpath so
-            # that it can still find the Qt libraries.  The required change is
-            # simple so we just patch the binary rather than require
-            # install_name_tool.  Note that install_name_tool is now always
-            # needed anyway.
-            with open(exe, 'rb') as f:
-                contents = f.read()
+        contents = contents.replace(b'@loader_path/../../../../../../../',
+                b'@loader_path/../../../../../\0\0\0\0\0\0')
 
-            contents = contents.replace(b'@loader_path/../../../../../../../',
-                    b'@loader_path/../../../../../\0\0\0\0\0\0')
+        with open(exe, 'wb') as f:
+            f.write(contents)
 
-            with open(exe, 'wb') as f:
-                f.write(contents)
-
-            if macos_thin_arch == 'arm64':
-                subprocess.run(['codesign', '-s', '-', exe])
+        if macos_thin_arch == 'arm64':
+            subprocess.run(['codesign', '-s', '-', exe])
 
     @classmethod
     def _fix_win_executable(cls, exe):

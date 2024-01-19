@@ -1,2 +1,2 @@
 packaging
-sip<7,>=6.3
+sip<7,>=6.7

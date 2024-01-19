@@ -48,8 +48,6 @@ doc/html/_static/classic.css
 doc/html/_static/doctools.js
 doc/html/_static/documentation_options.js
 doc/html/_static/file.png
-doc/html/_static/jquery-3.5.1.js
-doc/html/_static/jquery.js
 doc/html/_static/language_data.js
 doc/html/_static/logo.png
 doc/html/_static/logo_tn.png
@@ -59,8 +57,7 @@ doc/html/_static/pygments.css
 doc/html/_static/riverbank.css
 doc/html/_static/searchtools.js
 doc/html/_static/sidebar.js
-doc/html/_static/underscore-1.13.1.js
-doc/html/_static/underscore.js
+doc/html/_static/sphinx_highlight.js
 doc/riverbank/layout.html
 doc/riverbank/theme.conf
 doc/riverbank/static/logo.png
@@ -93,13 +90,9 @@ pyqtbuild/bundle/dlls/msvc-64/msvcp140_2.dll
 pyqtbuild/bundle/dlls/msvc-64/vcruntime140.dll
 pyqtbuild/bundle/dlls/msvc-64/vcruntime140_1.dll
 pyqtbuild/bundle/dlls/openssl-32/libcrypto-1_1.dll
-pyqtbuild/bundle/dlls/openssl-32/libeay32.dll
 pyqtbuild/bundle/dlls/openssl-32/libssl-1_1.dll
-pyqtbuild/bundle/dlls/openssl-32/ssleay32.dll
 pyqtbuild/bundle/dlls/openssl-64/libcrypto-1_1-x64.dll
-pyqtbuild/bundle/dlls/openssl-64/libeay32.dll
 pyqtbuild/bundle/dlls/openssl-64/libssl-1_1-x64.dll
-pyqtbuild/bundle/dlls/openssl-64/ssleay32.dll
 pyqtbuild/bundle/packages/__init__.py
 pyqtbuild/bundle/packages/pyqt.py
 pyqtbuild/bundle/packages/pyqt3d.py

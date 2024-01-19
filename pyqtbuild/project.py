@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Riverbank Computing Limited
+# Copyright (c) 2023, Riverbank Computing Limited
 # All rights reserved.
 #
 # This copy of PyQt-builder is licensed for use under the terms of the SIP
@@ -93,11 +93,11 @@ class PyQtProject(Project):
                     self.py_minor_version, abi)
             pylib_dir = pylib_shlib = ''
 
-            # Use distutils to get the additional configuration.
-            from distutils import sysconfig
+            # Get the additional configuration.
             from glob import glob
+            from sysconfig import get_config_vars
 
-            ducfg = sysconfig.get_config_vars()
+            ducfg = get_config_vars()
 
             config_args = ducfg.get('CONFIG_ARGS', '')
 
@@ -131,16 +131,33 @@ class PyQtProject(Project):
 
     def get_platform_tag(self):
         """ Return the platform tag to use in a wheel name.  This calls the
-        default implementation and replaces 'universal2' with 'x86_64' for
-        versions of Qt that don't support Apple silicon.
+        default implementation and applied the target Apple build type.
         """
 
-        platform_tag = super().get_platform_tag().split('_')
+        platform_tag = super().get_platform_tag()
 
-        if platform_tag[-1] == 'universal2' and self.builder.qt_version < 0x060200:
-            platform_tag[-1] = 'x86_64'
+        if sys.platform == 'darwin':
+            parts = platform_tag.split('_')
 
-        return '_'.join(platform_tag)
+            # We assume the format is 'macosx_major_minor_arch'.
+            if len(parts) == 4:
+                if self.apple_universal2:
+                    arch = 'universal2'
+                else:
+                    from platform import machine
+
+                    arch = machine()
+
+                    # For arm64 binaries enforce a valid minimum macOS version.
+                    if arch == 'arm64':
+                        if int(parts[1]) < 11:
+                            parts[1] = '11'
+                            parts[2] = '0'
+
+                parts[3] = arch
+                platform_tag = '_'.join(parts)
+
+        return platform_tag
 
     def get_options(self):
         """ Return the list of configurable options. """
@@ -170,6 +187,10 @@ class PyQtProject(Project):
         options.append(
                 Option('android_abis', option_type=list,
                         help="the target Android ABI", metavar="ABI"))
+
+        options.append(
+                Option('apple_universal2', option_type=bool,
+                        help="build a universal2 project"))
 
         options.append(
                 Option('link_full_dll', option_type=bool,
