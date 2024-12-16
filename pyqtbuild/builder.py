@@ -1,30 +1,10 @@
-# Copyright (c) 2022, Riverbank Computing Limited
-# All rights reserved.
-#
-# This copy of PyQt-builder is licensed for use under the terms of the SIP
-# License Agreement.  See the file LICENSE for more details.
-#
-# This copy of PyQt-builder may also used under the terms of the GNU General
-# Public License v2 or v3 as published by the Free Software Foundation which
-# can be found in the files LICENSE-GPL2 and LICENSE-GPL3 included in this
-# package.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE.
+# SPDX-License-Identifier: BSD-2-Clause
+
+# Copyright (c) 2024 Phil Thompson <phil@riverbankcomputing.com>
 
 
 import os
 import sys
-import sysconfig
 
 from sipbuild import (Buildable, BuildableModule, Builder, Option, Project,
         PyProjectOptionException, UserException)
@@ -117,10 +97,19 @@ class QmakeBuilder(Builder):
             # Set the default minimum GLIBC version.  This is actually a
             # function of the build platform and it should really be determined
             # by inspecting the compiled extension module.  These defaults
-            # reflect the minimum versions provided by the supported Qt
-            # platforms at any particular time.
+            # reflect the minimum versions required by the Qt online installer
+            # for a particular version.
             if not project.minimum_glibc_version:
-                if self.qt_version >= 0x060000:
+                if self.qt_version >= 0x060800:
+                    from platform import processor
+
+                    # The arm64 build is based on Ubuntu 24.04 rather than
+                    # 22.04.
+                    if processor() == 'aarch64':
+                        project.minimum_glibc_version = '2.39'
+                    else:
+                        project.minimum_glibc_version = '2.35'
+                elif self.qt_version >= 0x060000:
                     project.minimum_glibc_version = '2.28'
                 else:
                     project.minimum_glibc_version = '2.17'
@@ -146,13 +135,13 @@ class QmakeBuilder(Builder):
 
             # Set the default ABI version of the sip module.
             if not project.abi_version:
-                # These are the minimum recommended versions.  They usually
-                # correspond to specific functionality that users would expect
-                # to be enabled.
+                # These are the minimum recommended versions.  They correspond
+                # to the most up to date code that the current version of SIP
+                # will generate.
                 if project.sip_module == 'PyQt5.sip':
-                    project.abi_version = '12.11'
+                    project.abi_version = '12.13'
                 elif project.sip_module == 'PyQt6.sip':
-                    project.abi_version = '13.4'
+                    project.abi_version = '13.6'
 
         super().apply_user_defaults(tool)
 

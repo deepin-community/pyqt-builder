@@ -1,3 +1,50 @@
+pyqt-builder (1.17.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 08 Dec 2024 18:42:32 +0300
+
+pyqt-builder (1.16.4+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 13 Jul 2024 21:02:36 +0300
+
+pyqt-builder (1.16.3+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 23 Jun 2024 20:47:05 +0300
+
+pyqt-builder (1.16.2+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version to 4.7.0, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 28 Apr 2024 20:54:59 +0300
+
+pyqt-builder (1.16.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Fetch original tarballs from GitHub.
+    - The latest tarball on PyPI does not have the documentation.
+  * Update debian/upstream/metadata.
+  * Update debian/copyright for upstream license change.
+  * Update build-dependencies:
+    - Bump python3-setuptools required version to 64.
+    - Depend on python3-setuptools-scm.
+    - Depend on pybuild-plugin-pyproject.
+    - Limit python3-sphinx dependency to <!nodoc>.
+    - Depend on python3-myst-parser and python3-sphinx-rtd-theme.
+  * Update the command to build the documentation.
+  * Add support for nodoc build profile.
+  * Remove debian/python3-pyqtbuild.docs, there is no NEWS file anymore.
+  * Update Homepage URL.
+  * Pass version without +dfsg suffix to setuptools-scm.
+  * Add pyqtbuild/_version.py to debian/clean.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Thu, 04 Apr 2024 15:06:53 +0300
+
 pyqt-builder (1.15.4+dfsg-1) unstable; urgency=medium
 
   * New upstream release.

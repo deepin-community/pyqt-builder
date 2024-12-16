@@ -5,13 +5,18 @@ Maintainer: Debian Python Team <team+python@tracker.debian.org>
 Uploaders: Dmitry Shachnev <mitya57@debian.org>
 Build-Depends: debhelper-compat (= 13),
                dh-python,
+               dh-sequence-sphinxdoc <!nodoc>,
+               pybuild-plugin-pyproject,
                python3-all,
-               python3-setuptools,
+               python3-myst-parser <!nodoc>,
+               python3-setuptools (>= 64),
+               python3-setuptools-scm (>= 8),
                python3-sipbuild (>= 6.7),
-               python3-sphinx
+               python3-sphinx <!nodoc>,
+               python3-sphinx-rtd-theme <!nodoc>
 Rules-Requires-Root: no
-Standards-Version: 4.6.2
-Homepage: https://riverbankcomputing.com/software/pyqt-builder/intro
+Standards-Version: 4.7.0
+Homepage: https://github.com/Python-PyQt/PyQt-builder
 Vcs-Git: https://salsa.debian.org/python-team/packages/pyqt-builder.git
 Vcs-Browser: https://salsa.debian.org/python-team/packages/pyqt-builder
 
@@ -33,6 +38,7 @@ Description: PEP 517 compliant PyQt build system
  project.
 
 Package: pyqt-builder-doc
+Build-Profiles: <!nodoc>
 Architecture: all
 Section: doc
 Depends: ${misc:Depends}, ${sphinxdoc:Depends}
