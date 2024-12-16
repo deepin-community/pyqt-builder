@@ -1,6 +1,8 @@
-Bug-Submit: https://www.riverbankcomputing.com/mailman/listinfo/pyqt
-Documentation: https://www.riverbankcomputing.com/static/Docs/PyQt-builder/
+Bug-Database: https://github.com/Python-PyQt/PyQt-builder/issues
+Bug-Submit: https://github.com/Python-PyQt/PyQt-builder/issues/new
+Documentation: https://pyqt-builder.readthedocs.io/en/stable/index.html
 Registry:
   - Name: PyPI
     Entry: PyQt-builder
-Repository: https://riverbankcomputing.com/hg/PyQt-builder/
+Repository: https://github.com/Python-PyQt/PyQt-builder.git
+Repository-Browse: https://github.com/Python-PyQt/PyQt-builder

@@ -1,2 +1,3 @@
 PyQt_builder.egg-info/PKG-INFO
 PyQt_builder.egg-info/SOURCES.txt
+pyqtbuild/_version.py
